@@ -13,5 +13,5 @@ interface GithubUserApi {
     fun getUserDetails(@Path("userName") userName: String): Call<UserDetailResponse>
 
     @GET("users/{userName}/repos")
-    fun getUserRepos(@Path("userName") userName: String): Call<UserRepoResponse>
+    fun getUserRepos(@Path("userName") userName: String): Call<RepoPoko>
 }

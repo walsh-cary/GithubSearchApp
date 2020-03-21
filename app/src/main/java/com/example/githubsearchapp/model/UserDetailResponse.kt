@@ -7,5 +7,6 @@ data class UserDetailResponse(
     var created_at: String,
     var followers: String,
     var following: String,
-    var bio: String
+    var bio: String,
+    var public_repos: Int
 )
