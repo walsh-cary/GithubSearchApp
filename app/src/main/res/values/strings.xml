@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">GithubSearchApp</string>
+    <string name="username">UserName</string>
+    <string name="repo">Repo: ##</string>
+    <string name="search_for_github_users">Search for GitHub users</string>
+    <string name="username_detail">UserName</string>
+    <string name="email">Email</string>
+    <string name="location">Location</string>
+    <string name="join_date">Join Date</string>
+    <string name="followers">Followers</string>
+    <string name="following">Following</string>
+    <string name="biography_stub">Biography Stub</string>
+    <string name="search_for_repo">Search for repo</string>
+    <string name="repo_name">Repo Name</string>
+    <string name="_2_forks">2 Forks</string>
+    <string name="_5_stars">5 Stars</string>
+</resources>
