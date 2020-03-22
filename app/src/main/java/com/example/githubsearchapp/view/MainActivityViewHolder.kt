@@ -6,6 +6,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.githubsearchapp.R
+import com.example.githubsearchapp.model.RepoNumberPoko
 import com.example.githubsearchapp.model.UserDetailResponse
 import com.example.githubsearchapp.model.UserPoko
 
@@ -19,7 +20,7 @@ class MainActivityViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
         Glide.with(itemView).load(userPoko.avatar_url).into(avatarUrl)
     }
 
-    fun onBindUserDetail(userDetailResponse: UserDetailResponse) {
-        repoNumber.text = (userDetailResponse.public_repos.toString())
+    fun onBindRepoNumber(repoNumberPoko: RepoNumberPoko) {
+        repoNumber.text = (repoNumberPoko.public_repos.toString())
     }
 }

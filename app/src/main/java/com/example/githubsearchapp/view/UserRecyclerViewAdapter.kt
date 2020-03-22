@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.githubsearchapp.R
-import com.example.githubsearchapp.model.UserDetailResponse
+import com.example.githubsearchapp.model.RepoNumberPoko
 import com.example.githubsearchapp.model.UserSearchResponse
 
 class UserRecyclerViewAdapter
@@ -16,7 +16,7 @@ class UserRecyclerViewAdapter
             notifyDataSetChanged()
         }
 
-    var detailDataSet: UserDetailResponse? = null
+    var repoNumberDataSet: RepoNumberPoko? = null
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -39,6 +39,9 @@ class UserRecyclerViewAdapter
     override fun onBindViewHolder(holder: MainActivityViewHolder, position: Int) {
         userDataSet?.items?.get(position)?.let {
             holder.onBindUserPoko(it)
+        }
+        repoNumberDataSet?.let {
+            holder.onBindRepoNumber(it)
         }
     }
 

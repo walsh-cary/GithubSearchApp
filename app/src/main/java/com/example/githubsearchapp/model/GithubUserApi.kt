@@ -10,8 +10,11 @@ interface GithubUserApi {
     fun getUsers(@Query("q") q: String): Call<UserSearchResponse>
 
     @GET("users/{userName}")
+    fun getRepoNumber(@Path("userName") userName: String): Call<RepoNumberPoko>
+
+    @GET("users/{userName}")
     fun getUserDetails(@Path("userName") userName: String): Call<UserDetailResponse>
 
     @GET("users/{userName}/repos")
-    fun getUserRepos(@Path("userName") userName: String): Call<RepoPoko>
+    fun getUserRepos(@Path("userName") userName: String): Call<List<RepoPoko>>
 }
