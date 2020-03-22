@@ -5,9 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.githubsearchapp.R
 import com.example.githubsearchapp.model.RepoNumberPoko
+import com.example.githubsearchapp.model.UserPoko
 import com.example.githubsearchapp.model.UserSearchResponse
 
-class UserRecyclerViewAdapter
+class MainActivityUserRecyclerViewAdapter(val clickListener: (UserPoko) -> Unit)
     : RecyclerView.Adapter<MainActivityViewHolder>() {
 
     var userDataSet: UserSearchResponse? = null
@@ -38,7 +39,7 @@ class UserRecyclerViewAdapter
 
     override fun onBindViewHolder(holder: MainActivityViewHolder, position: Int) {
         userDataSet?.items?.get(position)?.let {
-            holder.onBindUserPoko(it)
+            holder.onBindUserPoko(it, clickListener)
         }
         repoNumberDataSet?.let {
             holder.onBindRepoNumber(it)

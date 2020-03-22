@@ -15,9 +15,10 @@ class MainActivityViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
     val avatarUrl: ImageView = itemView.findViewById(R.id.iv_user_thumbnail)
     val repoNumber: TextView = itemView.findViewById(R.id.tv_repo_number)
 
-    fun onBindUserPoko(userPoko: UserPoko) {
+    fun onBindUserPoko(userPoko: UserPoko, clickListener: (UserPoko) -> Unit) {
         userName.text = userPoko.login
         Glide.with(itemView).load(userPoko.avatar_url).into(avatarUrl)
+        itemView.setOnClickListener { clickListener(userPoko) }
     }
 
     fun onBindRepoNumber(repoNumberPoko: RepoNumberPoko) {

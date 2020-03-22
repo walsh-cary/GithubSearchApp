@@ -5,7 +5,8 @@ data class UserDetailResponse(
     var email: String,
     var location: String,
     var created_at: String,
-    var followers: String,
-    var following: String,
-    var bio: String
+    var followers: Int,
+    var following: Int,
+    var bio: String,
+    var avatar_url: String
 )

@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.githubsearchapp.model.*
 
-class MainActivityViewModel() : ViewModel() {
+class MainActivityViewModel : ViewModel() {
     private val userSearchDataSet: MutableLiveData<UserSearchResponse> = MutableLiveData()
     private val repoNumberDataSet: MutableLiveData<RepoNumberPoko> = MutableLiveData()
     private var userName: String? = null

@@ -14,11 +14,20 @@
         android:layout_margin="8dp"
         android:hint="@string/search_for_github_users" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_search"
+        app:layout_constraintTop_toBottomOf="@id/et_user_search"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/search_for_users" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/rv_users"
-        app:layout_constraintTop_toBottomOf="@id/et_user_search"
+        app:layout_constraintTop_toBottomOf="@id/btn_search"
         android:background="@android:color/black" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

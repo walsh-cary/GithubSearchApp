@@ -1,29 +1,33 @@
 package com.example.githubsearchapp.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubsearchapp.R
 import com.example.githubsearchapp.model.RepoNumberPoko
-import com.example.githubsearchapp.model.UserDetailResponse
+import com.example.githubsearchapp.model.UserPoko
 import com.example.githubsearchapp.model.UserSearchResponse
 import com.example.githubsearchapp.viewmodel.MainActivityViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    val userRecyclerViewAdapter: UserRecyclerViewAdapter by lazy { UserRecyclerViewAdapter() }
-
     var mainActivityViewModel: MainActivityViewModel? = null
+
+    companion object {
+        val USER_LOGIN_INTENT_ID = "USER_LOGIN"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val userRecyclerViewAdapter =
+            MainActivityUserRecyclerViewAdapter { user: UserPoko -> onUserClick(user) }
 
         rv_users.layoutManager = LinearLayoutManager(this)
         rv_users.adapter = userRecyclerViewAdapter
@@ -37,36 +41,7 @@ class MainActivity : AppCompatActivity() {
             }
         ).get(MainActivityViewModel::class.java)
 
-        populateRecyclerView(mainActivityViewModel!!)
-        userRecyclerViewAdapter.userDataSet = mainActivityViewModel!!.getUserSearchDataSet().value
-        userRecyclerViewAdapter.repoNumberDataSet =
-            mainActivityViewModel!!.getRepoNumberDataSet().value
-
-        et_user_search.addTextChangedListener(
-            object : TextWatcher {
-                override fun afterTextChanged(s: Editable?) {
-
-                }
-
-                override fun beforeTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    count: Int,
-                    after: Int
-                ) {
-
-                }
-
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    mainActivityViewModel!!.initMainRetrofit(et_user_search.text.toString())
-                }
-
-            }
-        )
-    }
-
-    private fun populateRecyclerView(mainActivityViewModel: MainActivityViewModel) {
-        mainActivityViewModel.getUserSearchDataSet().observe(
+        mainActivityViewModel!!.getUserSearchDataSet().observe(
             this@MainActivity,
             object : Observer<UserSearchResponse> {
                 override fun onChanged(t: UserSearchResponse?) {
@@ -74,7 +49,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         )
-        mainActivityViewModel.getRepoNumberDataSet().observe(
+        mainActivityViewModel!!.getRepoNumberDataSet().observe(
             this@MainActivity,
             object : Observer<RepoNumberPoko> {
                 override fun onChanged(t: RepoNumberPoko?) {
@@ -82,6 +57,18 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         )
+        userRecyclerViewAdapter.userDataSet = mainActivityViewModel!!.getUserSearchDataSet().value
+        userRecyclerViewAdapter.repoNumberDataSet =
+            mainActivityViewModel!!.getRepoNumberDataSet().value
 
+        btn_search.setOnClickListener {
+            mainActivityViewModel!!.initMainRetrofit(et_user_search.text.toString())
+        }
+    }
+
+    private fun onUserClick(user: UserPoko) {
+        val intent = Intent(this, UserActivity::class.java)
+        intent.putExtra(USER_LOGIN_INTENT_ID, user.login)
+        startActivity(intent)
     }
 }
