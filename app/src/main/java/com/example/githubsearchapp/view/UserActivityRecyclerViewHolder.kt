@@ -13,7 +13,7 @@ class UserActivityRecyclerViewHolder(itemView: View) : RecyclerView.ViewHolder(i
 
     fun onBind(repoPoko: RepoPoko) {
         name.text = repoPoko.name
-        forksCount.text = repoPoko.forks_count.toString()
-        stargazerCount.text = repoPoko.stargazers_count.toString()
+        forksCount.text = "Forks: " + repoPoko.forks_count.toString()
+        stargazerCount.text = "Stars: " + repoPoko.stargazers_count.toString()
     }
 }

@@ -10,10 +10,29 @@ class UserActivityAdapter :
     RecyclerView.Adapter<UserActivityRecyclerViewHolder>() {
 
     var repoDataSet: List<RepoPoko>? = null
+    var updateDataSet: List<RepoPoko>? = null
         set(value) {
             field = value
             notifyDataSetChanged()
         }
+
+    fun setData(data: List<RepoPoko>) {
+        repoDataSet = data as MutableList<RepoPoko>;
+        updateDataSet = data
+        notifyDataSetChanged()
+    }
+
+    fun applyFilter(query: String) {
+        var tempList = mutableListOf<RepoPoko>()
+        for (item in repoDataSet!!) {
+            val text = item.name
+            if (text.contains(query, true)) {
+                tempList.add(item)
+            }
+        }
+        updateDataSet = tempList
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
